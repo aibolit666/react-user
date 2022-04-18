@@ -5,11 +5,20 @@ import s from "./AddNewUser.module.css";
 
 const AddNewUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredAgeUsername, setAgeUsername] = useState("");
+  const [enteredAge, setAgeUsername] = useState("");
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    console.log(enteredUsername, enteredAgeUsername);
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+
+    if (+enteredAge < 1) {
+      return;
+    }
+
+    console.log(enteredUsername, enteredAge);
+
     setEnteredUsername("");
     setAgeUsername("");
   };
@@ -36,7 +45,7 @@ const AddNewUser = (props) => {
         <input
           id="age"
           type="number"
-          value={enteredAgeUsername}
+          value={enteredAge}
           onChange={ageChangeHandler}
         />
         <Button type="submit">Add user</Button>
